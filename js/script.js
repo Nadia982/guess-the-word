@@ -10,7 +10,21 @@ const playAgain = document.querySelector(".play-again"); // The hidden button th
 let word = "cat";
 const guessedLetters = [];
 let remainingGuesses = 8;
+console.log(word)
  
+// Async function to fetch words from external file: 
+const getWord = async function () {
+  const response = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+  const words = await response.text();
+  const wordArray = words.split("\n");
+  console.log(wordArray);
+  let randomIndex = Math.floor(Math.random()*wordArray.length)
+  let randomWord = wordArray[randomIndex].trim()
+  addPlaceholders(randomWord)
+}
+
+getWord()
+
 // function to add placeholders for each letter
 const addPlaceholders = function (word) {
   const placeholdersArray = [];
@@ -20,6 +34,7 @@ const addPlaceholders = function (word) {
   }
   wordInProgress.innerText = placeholdersArray.join("");
 };
+
 //Call the function, passing the word variable as the argument.
 addPlaceholders(word);
 
@@ -138,9 +153,3 @@ const checkIfPlayerWon = function () {
     message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
   }
 };
-
-
-// Call the New Function & Test the Game
-// Take placeholder(word) from your code’s global space and place it at the bottom of getWord(). 
-//In the location the call to placeholder(word) used to be, call getWord() instead.
-// Test out the game to ensure a new, random word is displaying on the screen. 

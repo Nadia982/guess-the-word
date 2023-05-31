@@ -2,14 +2,15 @@ const guessedLettersElement = document.querySelector(".guessed-letters"); // The
 const guessButton = document.querySelector(".guess"); // The button with the text “Guess!” in it.
 const textInput = document.querySelector(".letter"); // The text input where the player will guess a letter.
 const wordInProgress = document.querySelector(".word-in-progress"); // The empty paragraph where the word in progress will appear.
-const remainingGuesses = document.querySelector(".remaining"); // The paragraph where the remaining guesses will display.
+const remainingGuessesPara = document.querySelector(".remaining"); // The paragraph where the remaining guesses will display.
 const remainingGuessesSpan = document.querySelector(".remaining span"); // The span inside the paragraph where the remaining guesses will display.
 const message = document.querySelector(".message"); // The empty paragraph where messages will appear when the player guesses a letter.
 const playAgain = document.querySelector(".play-again"); // The hidden button that will appear prompting the player to play again.
 
-const word = "cat";
+let word = "cat";
 const guessedLetters = [];
-
+let remainingGuesses = 8;
+ 
 // function to add placeholders for each letter
 const addPlaceholders = function (word) {
   const placeholdersArray = [];
@@ -72,9 +73,9 @@ const makeGuess = function (guess) {
   } else {
     guessedLetters.push(guess);
     showGuessedLetters();
-  }
-  console.log(guessedLetters);
-  updateWordinProgress(guessedLetters);
+    updateRemainingGuesses(guess);
+    updateWordinProgress(guessedLetters)
+  };
 };
 
 //Create a function to show the guessed letters
@@ -103,7 +104,31 @@ const updateWordinProgress = function (guessedLetters) {
   }
 
   wordInProgress.innerText = revealWord.join("");
+  
   checkIfPlayerWon();
+};
+
+// Function to count guesses remaining
+const updateRemainingGuesses = function (guess) {
+  const wordUpper = word.toUpperCase();
+  if (!wordUpper.includes(guess.toUpperCase())){
+    message.classList.remove("correct")
+    message.classList.add("error")
+    message.innerText = `The word doesn't contain the letter ${guess}`;
+    remainingGuesses--;
+  } else {
+    message.classList.remove("error")
+    message.classList.add("correct")
+    message.innerText = `Good guess! The word contains the letter ${guess}.`;
+  }
+
+  if (remainingGuesses === 0) {
+    message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>.`;
+  } else if (remainingGuesses === 1) {
+    remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+  } else {
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+  }
 };
 
 // Create a function to check if the player won
@@ -113,3 +138,9 @@ const checkIfPlayerWon = function () {
     message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
   }
 };
+
+
+// Call the New Function & Test the Game
+// Take placeholder(word) from your code’s global space and place it at the bottom of getWord(). 
+//In the location the call to placeholder(word) used to be, call getWord() instead.
+// Test out the game to ensure a new, random word is displaying on the screen. 

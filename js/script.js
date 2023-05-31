@@ -19,7 +19,7 @@ const addPlaceholders = function (word) {
   }
   wordInProgress.innerText = placeholdersArray.join("");
 };
-//Call the function, passing the word variable as the argument. 
+//Call the function, passing the word variable as the argument.
 addPlaceholders(word);
 
 //add an event listener for when a player clicks the "guess" button
@@ -45,20 +45,14 @@ const validatePlayerInput = function (input) {
     message.classList.remove("correct");
     message.classList.add("error");
     message.innerText = "Please enter a letter!";
-    
-    
   } else if (input.length > 1) {
     message.classList.remove("correct");
     message.classList.add("error");
     message.innerText = "Please enter one letter at a time";
-    
-    
   } else if (!input.match(acceptedLetter)) {
     message.classList.remove("correct");
     message.classList.add("error");
     message.innerText = "Enter a letter from A to Z";
-
-    
   } else {
     message.classList.remove("error");
     message.classList.add("correct");
@@ -77,17 +71,38 @@ const makeGuess = function (guess) {
       "You have already guessed that letter - please try again";
   } else {
     guessedLetters.push(guess);
-    showGuessedLetters()
+    showGuessedLetters();
   }
   console.log(guessedLetters);
+  updateWordinProgress(guessedLetters)
 };
 
 //Create a function to show the guessed letters
 const showGuessedLetters = function () {
   guessedLettersElement.innerHTML = "";
-  for (const letter of guessedLetters){
+  for (const letter of guessedLetters) {
     const li = document.createElement("li");
     li.innerText = letter;
-    guessedLettersElement.append(li);    
-  } 
-}
+    guessedLettersElement.append(li);
+  }
+};
+
+// Create a function to update the word in progress, which accepts the guessedLetters array as a param
+// This function will replace the circle symbols with the correct letters guessed.
+const updateWordinProgress = function (guessedLetters) {
+  const wordUpper = word.toUpperCase();
+  const wordArray = wordUpper.split(''); 
+  const revealWord = [];
+  console.log(wordArray);
+  for (const letter of wordArray){
+    if (guessedLetters.includes(letter)){
+      revealWord.push(letter.toUpperCase())
+    } else {
+      revealWord.push("●")
+    }
+  }
+
+ wordInProgress.innerText = revealWord.join("");
+
+};
+

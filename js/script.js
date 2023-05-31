@@ -10,6 +10,7 @@ const playAgain = document.querySelector(".play-again"); // The hidden button th
 const word = "magnolia";
 const guessedLetters = [];
 
+// function to add placeholders for each letter
 const addPlaceholders = function (word) {
   const placeholdersArray = [];
   for (const letter of word) {
@@ -18,9 +19,10 @@ const addPlaceholders = function (word) {
   }
   wordInProgress.innerText = placeholdersArray.join("");
 };
-
+//Call the function, passing the word variable as the argument. 
 addPlaceholders(word);
 
+//add an event listener for when a player clicks the "guess" button
 guessButton.addEventListener("click", function (e) {
   e.preventDefault();
   message.innerText = "";
@@ -40,24 +42,52 @@ guessButton.addEventListener("click", function (e) {
 const validatePlayerInput = function (input) {
   const acceptedLetter = /[a-zA-Z]/;
   if (input.length === 0) {
+    message.classList.remove("correct");
+    message.classList.add("error");
     message.innerText = "Please enter a letter!";
+    
+    
   } else if (input.length > 1) {
+    message.classList.remove("correct");
+    message.classList.add("error");
     message.innerText = "Please enter one letter at a time";
+    
+    
   } else if (!input.match(acceptedLetter)) {
+    message.classList.remove("correct");
+    message.classList.add("error");
     message.innerText = "Enter a letter from A to Z";
+
+    
   } else {
+    message.classList.remove("error");
+    message.classList.add("correct");
     message.innerText = "That guess was valid";
     return input;
   }
 };
 
+// Create a function to capture input
 const makeGuess = function (guess) {
   guess = guess.toUpperCase();
   if (guessedLetters.includes(guess)) {
+    message.classList.remove("correct");
+    message.classList.add("error");
     message.innerText =
       "You have already guessed that letter - please try again";
   } else {
     guessedLetters.push(guess);
+    showGuessedLetters()
   }
   console.log(guessedLetters);
 };
+
+//Create a function to show the guessed letters
+const showGuessedLetters = function () {
+  guessedLettersElement.innerHTML = "";
+  for (const letter of guessedLetters){
+    const li = document.createElement("li");
+    li.innerText = letter;
+    guessedLettersElement.append(li);    
+  } 
+}

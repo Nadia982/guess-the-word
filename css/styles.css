@@ -68,8 +68,14 @@ h1 {
   font-size: 30px;
 }
 
+.remaining {
+  margin: 0;
+}
+
 .guessed-letters {
   padding: 0;
+  height: 2rem;
+  margin-bottom: 0;
   list-style: none;
 }
 
@@ -80,7 +86,8 @@ h1 {
 
 .message {
   text-align: center;
-  height: 2rem;
+  height: 1.5rem;
+  margin-bottom: 0;
 }
 
 .guess-form {
@@ -137,7 +144,15 @@ input:focus {
   color: white;
 }
 
-/* animatied background */
+.error {
+  color: rgb(194, 8, 8);
+ }
+ 
+ .correct {
+ color: rgb(18, 160, 54)
+ }
+
+/* animated background */
 .win {
   padding: 0 1em;
   background: linear-gradient(-45deg, #ff9d64, #f5620c);
@@ -157,4 +172,5 @@ input:focus {
   100% {
     background-position: 0% 50%;
   }
+
 }

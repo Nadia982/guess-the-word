@@ -74,7 +74,7 @@ const makeGuess = function (guess) {
     showGuessedLetters();
   }
   console.log(guessedLetters);
-  updateWordinProgress(guessedLetters)
+  updateWordinProgress(guessedLetters);
 };
 
 //Create a function to show the guessed letters
@@ -91,31 +91,25 @@ const showGuessedLetters = function () {
 // This function will replace the circle symbols with the correct letters guessed.
 const updateWordinProgress = function (guessedLetters) {
   const wordUpper = word.toUpperCase();
-  const wordArray = wordUpper.split(''); 
+  const wordArray = wordUpper.split("");
   const revealWord = [];
   console.log(wordArray);
-  for (const letter of wordArray){
-    if (guessedLetters.includes(letter)){
-      revealWord.push(letter.toUpperCase())
+  for (const letter of wordArray) {
+    if (guessedLetters.includes(letter)) {
+      revealWord.push(letter.toUpperCase());
     } else {
-      revealWord.push("●")
+      revealWord.push("●");
     }
   }
 
- wordInProgress.innerText = revealWord.join("");
- checkIfPlayerWon()
+  wordInProgress.innerText = revealWord.join("");
+  checkIfPlayerWon();
 };
 
 // Create a function to check if the player won
 const checkIfPlayerWon = function () {
-  if(wordInProgress.innerText === word.toUpperCase()){
+  if (wordInProgress.innerText === word.toUpperCase()) {
     message.classList.add("win");
-    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`
+    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
   }
-
-}
-
-// Play the game to make sure the guessed letters are displaying on the screen. 
-//When all the corrected letters are guessed, you should see the congratulatory message.
-// add, commit and push the changes to GitHub. Copy the link to your repo and submit it below.
-
+};

@@ -147,11 +147,11 @@ input:focus {
 
 .error {
   color: rgb(194, 8, 8);
- }
- 
- .correct {
- color: rgb(18, 160, 54)
- }
+}
+
+.correct {
+  color: rgb(18, 160, 54);
+}
 
 /* animated background */
 .win {
@@ -173,5 +173,4 @@ input:focus {
   100% {
     background-position: 0% 50%;
   }
-
 }

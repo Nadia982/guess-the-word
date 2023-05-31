@@ -7,7 +7,7 @@ const remainingGuessesSpan = document.querySelector(".remaining span"); // The s
 const message = document.querySelector(".message"); // The empty paragraph where messages will appear when the player guesses a letter.
 const playAgain = document.querySelector(".play-again"); // The hidden button that will appear prompting the player to play again.
 
-const word = "magnolia";
+const word = "cat";
 const guessedLetters = [];
 
 // function to add placeholders for each letter
@@ -103,6 +103,19 @@ const updateWordinProgress = function (guessedLetters) {
   }
 
  wordInProgress.innerText = revealWord.join("");
-
+ checkIfPlayerWon()
 };
+
+// Create a function to check if the player won
+const checkIfPlayerWon = function () {
+  if(wordInProgress.innerText === word.toUpperCase()){
+    message.classList.add("win");
+    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`
+  }
+
+}
+
+// Play the game to make sure the guessed letters are displaying on the screen. 
+//When all the corrected letters are guessed, you should see the congratulatory message.
+// add, commit and push the changes to GitHub. Copy the link to your repo and submit it below.
 
